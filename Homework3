@@ -54,10 +54,10 @@ class DoublyLinkedList:
         # You may use a generator (with keyword "yield" ) to implement the iterator method.
         # For each node after the Sentinel Head, yield its data (instead of yielding the node itself).
         current = self.head.next
-        while current.next is not self.head:
+        while current is not self.head:
           yield current.data
           current = current.next
-        yield self.head.prev.data
+       
 
     def __repr__(self):
         ####################    DO NOT CHANGE   ####################
@@ -129,13 +129,10 @@ class DoublyLinkedList:
         # This method implements "item in DoublyLinkedList" as a Boolean.
         # Return True if item is in this DoublyLinkedList, or else return False.
         current = self.head
-        while current.next is not self.head:
+        while current is not self.head:
           if current == item:
             return True
-          elif self.head.prev == item:
-            return True
-          else:
-            current = current.next
+          current = current.next
         return False
 
     def __add__(self, other):
@@ -146,22 +143,17 @@ class DoublyLinkedList:
         # Remember to change the self.length of the updated DoublyLinkedList accordingly.
         # Don't return anything in this method, the head of the updated DoublyLinkedList is still self.head.
         current = other.head.next
-        while current.next is not self.head:
-          self.append(current)
+        while current is not other.head:
+          self.append(current.data)
           current = current.next
-        self.append(other.head.prev)
+
 
     def remove_items(self, item):
         # Remove each node in this DoublyLinkedList containing the input item as its data.
         # If at least one node is removed, remember to decrease the length of this DoublyLinkedList.
         # Don't return anything in this method.
-        last = self.head.prev
-        if last.data == item:
-          last.prev.next = self.head
-          self.head.prev = last.prev
-          self.length -= 1  
         current = self.head.next
-        while current.next is not self.head: 
+        while current is not self.head: 
           previous = current.prev
           nextNode = current.next
           if current.data == item:
@@ -169,7 +161,6 @@ class DoublyLinkedList:
             nextNode.prev = previous
             self.length -= 1  
           current = current.next
-          
 
     def reverse_list(self):
         # Reverse the order of nodes in this DoublyLinkedList.
