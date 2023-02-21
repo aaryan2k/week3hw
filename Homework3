@@ -67,7 +67,7 @@ class DoublyLinkedList:
         assert (isinstance(index, int)) and index >= 0 and index < self.length
         # Move the cursor to the given index, where index is in range(0, self.length).
         # Don't return anything in this method.
-        current = self.head.next
+        current = self.head
         for i in range(0, self.length):
           if (i == index):
             self.cursor = current
@@ -128,7 +128,7 @@ class DoublyLinkedList:
     def __contains__(self, item):
         # This method implements "item in DoublyLinkedList" as a Boolean.
         # Return True if item is in this DoublyLinkedList, or else return False.
-        current = self.head
+        current = self.head.next
         while current is not self.head:
           if current == item:
             return True
